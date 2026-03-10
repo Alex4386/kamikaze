@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
 #include <fcntl.h>
@@ -9,8 +10,6 @@
 
 int main() {
     int fd;
-    char *msg = KAMIKAZE_MSG;
-
     ensure_mount();
 
     // kernel msg ring go brrr
