@@ -38,7 +38,7 @@ So in order to check if your kernel build "boots", you just need to check `seria
     > 3. Causing kernel panic to kill kernel is faster than graceful system shutdown  
     >    (as a added bonus, you get a nice stack trace in the kernel log)
 4. Why this name?
-    > It's [kills itself](https://en.wikipedia.org/wiki/Kamikaze).  
+    > It [kills itself](https://en.wikipedia.org/wiki/Kamikaze).  
     > <sub>this is sorta-ragebait-name for regional developers, ya know? more provocative, easy to remember, lol.</sub>
 
 ## Usage
