@@ -25,7 +25,8 @@ So in order to check if your kernel build "boots", you just need to check `seria
 
 ## FAQ
 1. Can't you just call `panic()` instead of `SIGKILL`ing yourself?  
-   > Dude, this is `init`! A userland process, not a kernel module. `panic()` is not available here.
+   > Dude, this is `init`! A userland process, not a kernel module. `panic()` is not available here.  
+   > Also, if you can cause `panic()` from userland, it will be absolute nightmare. think about it, if the browser misbehaves, does it crash the whole system? no. We left those at Windows 9x era.
 2. Why do you even need to mount `devtmpfs`?
    > Just in case you screwed up your rootfs. You can disable this behavior by defining `-DAUTOMOUNT_DEVTMPFS=0` when building.
 3. Why not do ACPI Shutdown instead?
