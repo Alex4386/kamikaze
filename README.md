@@ -12,7 +12,8 @@ Dead simple:
 
 ## What is it for?
 In kernel development, quickly spin up some kernel and testing is required. usually this is done on QEMU with `serial0` attached for console. Usually this requires horrendous cycle of booting into rootfs and wait until busybox do the init.  
-
+**This is where `kamikaze` comes in.** It checks whether kernel is OK state to boot into userland, and then it kills itself.  
+  
 `kamikaze` on init basically:
 1. mounts the devtmpfs
 2. simply push `"kamikaze started, crashing!"` into kernel message ring.
