@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc cpio
+
+      - name: Build static binary
+        run: make
+
+      - name: Build cpio initramfs
+        run: make cpio
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            kamikaze
+            kamikaze.cpio

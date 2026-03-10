@@ -1,0 +1,5 @@
+kamikaze
+kamikaze.cpio
+rootfs/
+ci/.cache/
+ci/qemu.log
