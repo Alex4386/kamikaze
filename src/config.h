@@ -22,7 +22,7 @@
 #endif
 
 #ifndef KAMIKAZE_EXIT_MSG
-#define KAMIKAZE_EXIT_MSG "kamikaze: syscall fallback failed. failing over to exiting\n"
+#define KAMIKAZE_EXIT_MSG "kamikaze: raising SIGKILL fallback failed. failing over to exiting"
 #endif
 
 // == actual msg ==
