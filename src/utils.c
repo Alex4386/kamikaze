@@ -7,6 +7,7 @@
 
 #ifdef __linux__
     #include <sys/mount.h>
+    #include <sys/stat.h>
 #endif
 
 int ensure_devdir() {
@@ -19,13 +20,15 @@ int ensure_devdir() {
         // this means, /dev exists.
         // we need to check if it is directory.
 
-        struct stat st;
-        stat("/dev", &st);
-        if (!S_ISDIR(st.st_mode)) {
-            // if it is not directory, we need to remove it and create directory.
-            unlink("/dev");
-            mkdir("/dev", 0755);
-        }
+        #ifdef __linux__
+            struct stat st;
+            stat("/dev", &st);
+            if (!S_ISDIR(st.st_mode)) {
+                // if it is not directory, we need to remove it and create directory.
+                unlink("/dev");
+                mkdir("/dev", 0755);
+            }
+        #endif 
     }
     return 0;
 }
