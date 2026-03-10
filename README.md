@@ -1,6 +1,10 @@
 # 🛩️ `kamikaze`
 `kamikaze` is a dead-simple `init`, but `SIGKILL`s itself right after initialized.
 
+<center>
+  <img width="1513" height="831" alt="image" src="https://github.com/user-attachments/assets/e7d86f82-6979-44ea-9d97-044071e4e82e" />
+</center>
+
 ## What does it do?
 Dead simple:  
 1. Say hello `"kamikaze started, crashing!"` into kernel ring buffer
