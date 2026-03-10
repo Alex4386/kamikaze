@@ -16,9 +16,20 @@ In kernel development, quickly spin up some kernel and testing is required. usua
 `kamikaze` on init basically:
 1. mounts the devtmpfs
 2. simply push `"kamikaze started, crashing!"` into kernel message ring.
-3. `SIGKILL` itself
+3. `SIGKILL` itself.
+    1. If this fails, it fallbacks to `raise`.
+    2. If this also fails, it just `exit(1)`.
 
 So in order to check if your kernel build "boots", you just need to check `serial0` for that specific string and your build is ready to go!
+
+## FAQ
+1. Can't you just call `panic()` instead of `SIGKILL`ing yourself?  
+   > Dude, this is `init`! A userland process, not a kernel module. `panic()` is not available here.
+2. Why do you even need to mount `devtmpfs`?
+   > Just in case you screwed up your rootfs. You can disable this behavior by defining `-DAUTOMOUNT_DEVTMPFS=0` when building.
+3. Why not do ACPI Shutdown instead?
+    > First of all, `ACPI` is Microsoft stuff, So you shouldn't expect all platforms to implement it.  
+    > Second, using `SIGKILL` allows `kamikaze` to be used in `LXC` environments, allowing `kamikaze`'d LXC (which would serve no purpose but still)  
 
 ## Usage
 Build just the statically linked binary:
