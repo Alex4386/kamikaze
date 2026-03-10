@@ -31,7 +31,7 @@ So in order to check if your kernel build "boots", you just need to check `seria
     > First of all, `ACPI` is Microsoft stuff, So you shouldn't expect all platforms to implement it.  
     > Second, using `SIGKILL` allows `kamikaze` to be used in `LXC` environments, allowing `kamikaze`'d LXC (which would serve no purpose but still)  
 4. Why this name?
-    > First, it's kills itself.
+    > First, it's [kills itself](https://en.wikipedia.org/wiki/Kamikaze)  
     > Second, this is sorta-ragebait-name for regional developers, ya know? easy to remember, lol.
 
 ## Usage
