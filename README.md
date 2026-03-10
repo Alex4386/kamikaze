@@ -30,8 +30,9 @@ So in order to check if your kernel build "boots", you just need to check `seria
    > Just in case you screwed up your rootfs. You can disable this behavior by defining `-DAUTOMOUNT_DEVTMPFS=0` when building.
 3. Why not do ACPI Shutdown instead?
     > 1. `ACPI` is Microsoft stuff, So you shouldn't expect all platforms to implement it.  
-    > 2. Second, using `SIGKILL` allows `kamikaze` to be used in `LXC` environments, allowing `kamikaze`'d LXC (which would serve no purpose but still)  
-    > 3. causing kernel panic to kill kernel is faster than graceful system shutdown (as a added bonus, you get a nice stack trace in the kernel log)
+    > 2. Using `SIGKILL` allows `kamikaze` to be used in `LXC` environments, allowing `kamikaze`'d LXC (which would serve no purpose but still)  
+    > 3. Causing kernel panic to kill kernel is faster than graceful system shutdown  
+    >    (as a added bonus, you get a nice stack trace in the kernel log)
 4. Why this name?
     > First, it's [kills itself](https://en.wikipedia.org/wiki/Kamikaze)  
     > Second, this is sorta-ragebait-name for regional developers, ya know? easy to remember, lol.
