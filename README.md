@@ -29,8 +29,9 @@ So in order to check if your kernel build "boots", you just need to check `seria
 2. Why do you even need to mount `devtmpfs`?
    > Just in case you screwed up your rootfs. You can disable this behavior by defining `-DAUTOMOUNT_DEVTMPFS=0` when building.
 3. Why not do ACPI Shutdown instead?
-    > First of all, `ACPI` is Microsoft stuff, So you shouldn't expect all platforms to implement it.  
-    > Second, using `SIGKILL` allows `kamikaze` to be used in `LXC` environments, allowing `kamikaze`'d LXC (which would serve no purpose but still)  
+    > 1. `ACPI` is Microsoft stuff, So you shouldn't expect all platforms to implement it.  
+    > 2. Second, using `SIGKILL` allows `kamikaze` to be used in `LXC` environments, allowing `kamikaze`'d LXC (which would serve no purpose but still)  
+    > 3. causing kernel panic to kill kernel is faster than graceful system shutdown (as a added bonus, you get a nice stack trace in the kernel log)
 4. Why this name?
     > First, it's [kills itself](https://en.wikipedia.org/wiki/Kamikaze)  
     > Second, this is sorta-ragebait-name for regional developers, ya know? easy to remember, lol.
@@ -51,6 +52,13 @@ make cpio
 > ```bash
 > qemu-system-x86_64 -kernel bzImage -initrd kamikaze.cpio -nographic -append "console=ttyS0"
 > ```
+
+## Integration
+See [ci/run-qemu.sh](ci/run-qemu.sh) for an example. Basically you need to do the following steps:
+1. Build `rootfs` (You can use `make cpio`)
+2. Bring your built kernel image
+3. Run QEMU with `-kernel` flag pointing to your kernel and `console=ttyS0` so `dmesg` can be read from `serial0`.
+4. save that into file, and check for `"kamikaze started, crashing!"` string with grep or something (If you have defined custom string with `-DKAMIKAZE_MSG=your_message`, check for that instead)
 
 ## License
 This is such a dumb util for doing any sort of licensing.  
