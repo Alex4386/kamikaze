@@ -35,13 +35,3 @@ int get_console_fd() {
     // in case of failure, return negative
     return -1;
 }
-
-static void safe_write(int fd, const char *s, size_t len) {
-    if (fd >= 0) {
-        ssize_t ignored = write(fd, s, len);
-        (void)ignored; 
-        
-        // force sync flush to serial
-        sync(); 
-    }
-}
