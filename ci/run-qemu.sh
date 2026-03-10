@@ -51,7 +51,7 @@ run_qemu() {
         qemu-system-x86_64 \
             -kernel "$KERNEL_FILE" \
             -initrd "$PROJECT_DIR/kamikaze.cpio" \
-            -append "console=ttyS0 earlyprintk=serial,ttyS0 panic=-1" \
+            -append "console=ttyS0 earlyprintk=serial,ttyS0 panic=-1 printk.synchronous=1" \
             -nographic \
             -no-reboot \
             -m 256 \
