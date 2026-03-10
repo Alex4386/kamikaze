@@ -62,7 +62,8 @@ See [ci/run-qemu.sh](ci/run-qemu.sh) for an example. Basically you need to do th
 1. Build `rootfs` (You can use `make cpio`)
 2. Bring your built kernel image
 3. Run QEMU with `-kernel` flag pointing to your kernel and `console=ttyS0` so `dmesg` can be read from `serial0`.
-4. save that into file, and check for `"kamikaze started, crashing!"` string with grep or something (If you have defined custom string with `-DKAMIKAZE_MSG=your_message`, check for that instead)
+4. save that into file, and check for `"kamikaze started, crashing!"` string with grep or something  
+   (If you have defined custom string with `-DKAMIKAZE_MSG=your_message`, check for that instead)
 
 ## License
 This is such a dumb util for doing any sort of licensing.  
