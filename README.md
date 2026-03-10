@@ -29,14 +29,16 @@ So in order to check if your kernel build "boots", you just need to check `seria
    > Also, if you can cause `panic()` from userland, it will be absolute nightmare. think about it, if the browser misbehaves, does it crash the whole system? no. We left those at Windows 9x era.
 2. Why do you even need to mount `devtmpfs`?
    > Just in case you screwed up your rootfs. You can disable this behavior by defining `-DAUTOMOUNT_DEVTMPFS=0` when building.
+   > Also, we are in userland. and we are the `init`. it is technically systemd or other init system's job to mount `devtmpfs`, but `kamikaze` here is the init system here. So we need to do it by ourselves. We need `/dev/kmsg` to dial home. so we need to mount them.  
+   > This also means minimum requirement for running `kamikaze` is a kernel with `CONFIG_DEVTMPFS` enabled. I didn't use `syslog` at the moment because I thought it was viable to make it portable for `darwin` platforms which I gave up. so I chose *NIX way of doing things.
 3. Why not do ACPI Shutdown instead?
     > 1. `ACPI` is Microsoft stuff, So you shouldn't expect all platforms to implement it.  
     > 2. Using `SIGKILL` allows `kamikaze` to be used in `LXC` environments, allowing `kamikaze`'d LXC (which would serve no purpose but still)  
     > 3. Causing kernel panic to kill kernel is faster than graceful system shutdown  
     >    (as a added bonus, you get a nice stack trace in the kernel log)
 4. Why this name?
-    > First, it's [kills itself](https://en.wikipedia.org/wiki/Kamikaze)  
-    > Second, this is sorta-ragebait-name for regional developers, ya know? easy to remember, lol.
+    > It's [kills itself](https://en.wikipedia.org/wiki/Kamikaze).  
+    > <sub>this is sorta-ragebait-name for regional developers, ya know? more provocative, easy to remember, lol.</sub>
 
 ## Usage
 Build just the statically linked binary:
