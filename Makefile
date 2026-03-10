@@ -18,6 +18,8 @@ $(BIN_NAME): ./src/main.c ./src/config.h ./src/utils.c ./src/utils.h
 cpio: $(BIN_NAME)
 	@echo "=> Building rootfs structure..."
 	rm -rf $(ROOTFS_DIR)
+	# technically kamikaze can create /dev if not exists,
+	# but let's play safe here
 	mkdir -p $(ROOTFS_DIR)/dev
 	# Copy the binary as 'init' so the kernel executes it automatically
 	cp $(BIN_NAME) $(ROOTFS_DIR)/init

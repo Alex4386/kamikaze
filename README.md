@@ -46,7 +46,7 @@ Build just the statically linked binary:
 make
 ```
 
-Or build binary and pack it into initramfs archive:
+Or build binary and pack it into rootfs cpio archive:
 ```
 make cpio
 ```
