@@ -9,7 +9,12 @@ Dead simple:
 ## What is it for?
 In kernel development, quickly spin up some kernel and testing is required. usually this is done on QEMU with `serial0` attached for console. Usually this requires horrendous cycle of booting into rootfs and wait until busybox do the init.  
 
-`kamikaze` init simply push `"kamikaze started, crashing!"` into kernel message ring.  
+`kamikaze` on init basically:
+1. mounts the devtmpfs
+2. simply push `"kamikaze started, crashing!"` into kernel message ring.
+3. `SIGKILL` itself
+
+So in order to check if your kernel build "boots", you just need to check `serial0` for that specific string and your build is ready to go!
 
 ## Usage
 Build just the statically linked binary:
