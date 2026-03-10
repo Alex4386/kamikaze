@@ -3,6 +3,7 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <string.h>
+#include <sys/syscall.h>
 #include "config.h"
 #include "utils.h"
 
@@ -23,13 +24,27 @@ int main() {
     }
 
     sync();
-    kill(getpid(), SIGKILL);
 
-    // we shouldn't reach here at the first point,
-    // spinlock the heck out of it
-    while(1) {
-        sleep(1);
+    int pid = getpid();
+    kill(pid, SIGKILL);
+    
+    const char* syscall_note = "kamikaze: SIGKILL was not working properly. trying raising SIGKILL";
+    fd = get_console_fd();
+    if (fd >= 0) {
+        write(fd, syscall_note, sizeof(syscall_note) - 1);
+        close(fd);
     }
+
+    raise(SIGKILL);
+    
+    const char* spinlock_note = "kamikaze: syscall fallback failed. failing over to exiting";
+    fd = get_console_fd();
+    if (fd >= 0) {
+        write(fd, spinlock_note, sizeof(spinlock_note) - 1);
+        close(fd);
+    }
+
+    exit(1);
     
     return 0;
 }
