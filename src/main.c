@@ -33,6 +33,7 @@ int main() {
     if (fd >= 0) {
         write(fd, syscall_note, sizeof(syscall_note) - 1);
         close(fd);
+        sync();
     }
 
     raise(SIGKILL);
@@ -42,6 +43,7 @@ int main() {
     if (fd >= 0) {
         write(fd, spinlock_note, sizeof(spinlock_note) - 1);
         close(fd);
+        sync();
     }
 
     exit(1);
